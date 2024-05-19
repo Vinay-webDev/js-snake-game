@@ -17,6 +17,8 @@ var snakeBody = [];
 // food🍕
 var foodX;
 var foodY;
+// gameOver
+var gameOver = false;
 
 window.onload = function () {
     board = document.getElementById("board");
@@ -32,6 +34,11 @@ window.onload = function () {
 }
 
 function update () {
+
+    if (gameOver) {
+        return;
+    }
+
     context.fillStyle = "black"; // this will set the pen color to black
     context.fillRect(0, 0, board.width, board.height);
     // to draw food🍕
@@ -57,6 +64,11 @@ function update () {
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
     for (let i = 0; i < snakeBody.length; i++) {
        context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+    }
+    // gameOver conditions
+    if (snakeX < 0 || snakeX > columns * blockSize || snakeY < 0 || snakeY > rows * blockSize) {
+        gameOver = true;
+        alert("game over!");
     }
     
 }

@@ -42,6 +42,15 @@ function update () {
         snakeBody.push([foodX, foodY]);// snake growth🐍
         placeFood();// for next food at random position🍕
     }
+    //to grow snake🐍🐍🐍
+    for (let i = snakeBody.length -1; i > 0; i--) {
+        snakeBody[i] = snakeBody[i-1];
+    }
+    // snake's second body🐍 = snake's head🐍
+    if (snakeBody.length) {
+        snakeBody[0] = [snakeX, snakeY];
+    }
+
     context.fillStyle = "lime";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;

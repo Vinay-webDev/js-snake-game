@@ -20,9 +20,10 @@ var foodY;
 
 window.onload = function () {
     board = document.getElementById("board");
-    board.height = rows * blockSize;
     board.width = columns * blockSize;
+    board.height = rows * blockSize;
     context = board.getContext("2d"); // used to draw on the board
+
     placeFood();
     // to move snake🐍
     document.addEventListener("keyup", changeDirection);
@@ -45,9 +46,8 @@ function update () {
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
-    
     for (let i = 0; i < snakeBody.length; i++) {
-       snakeBody.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+       context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
     
 }
@@ -57,6 +57,7 @@ function placeFood() {
     foodX = Math.floor(Math.random()* columns) * blockSize;
     foodY = Math.floor(Math.random()* rows) * blockSize;
 }
+
 // changeDirection⬅️➡️⬆️⬇️
 function changeDirection(event) {
     if (event.key === "w" && velocityY != 1) {
@@ -76,6 +77,7 @@ function changeDirection(event) {
         velocityY = 0;
     }
 }
+
 
 
 

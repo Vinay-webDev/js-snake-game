@@ -31,14 +31,18 @@ window.onload = function () {
 function update () {
     context.fillStyle = "black"; // this will set the pen color to black
     context.fillRect(0, 0, board.width, board.height);
+    // to draw food🍕
+    context.fillStyle = "red";
+    context.fillRect(foodX, foodY, blockSize, blockSize);
     //to draw snake🐍
+    if (snakeX === foodX && snakeY === foodY) {
+        placeFood();
+    }
     context.fillStyle = "lime";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
-    // to draw food🍕
-    context.fillStyle = "red";
-    context.fillRect(foodX, foodY, blockSize, blockSize);
+    
 }
 
 // to draw food at random position
@@ -48,19 +52,19 @@ function placeFood() {
 }
 // changeDirection⬅️➡️⬆️⬇️
 function changeDirection(event) {
-    if (event.key === "ArrowUp") {
+    if (event.key === "w" && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
     }
-    else if (event.key === "ArrowDown") {
+    else if (event.key === "s" && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
     }
-    else if (event.key === "ArrowLeft") {
+    else if (event.key === "a" && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
     }
-    else if (event.key === "ArrowRight") {
+    else if (event.key === "d" && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
     }

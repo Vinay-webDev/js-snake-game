@@ -11,10 +11,12 @@ var snakeY = blockSize * 5;
 // snake velocity🐍
 var velocityX = 0;
 var velocityY = 0;
+// snake growth🐍
+var snakeBody = [];
 
 // food🍕
-var foodX = blockSize * 10;
-var foodY = blockSize * 10;
+var foodX;
+var foodY;
 
 window.onload = function () {
     board = document.getElementById("board");
@@ -36,12 +38,17 @@ function update () {
     context.fillRect(foodX, foodY, blockSize, blockSize);
     //to draw snake🐍
     if (snakeX === foodX && snakeY === foodY) {
-        placeFood();
+        snakeBody.push([foodX, foodY]);// snake growth🐍
+        placeFood();// for next food at random position🍕
     }
     context.fillStyle = "lime";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
+    
+    for (let i = 0; i < snakeBody.length; i++) {
+       snakeBody.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+    }
     
 }
 
